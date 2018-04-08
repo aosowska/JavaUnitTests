@@ -1,13 +1,12 @@
 package ships;
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
-//import java.util.ArrayList;
-//import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-//import junit.framework.TestSuite;
 import ships.Ships;
 import ships.Direction;
 import ships.ShipPosition;
@@ -53,12 +52,6 @@ public class ShipsTest
     public void setUp(){
      ships = new Ships();
      shipPosition =  new ShipPosition(1,1,Direction.N); 
-	}
-	
-	
-	@Test
-	public void MoveTest() {
-		
 	}
 	
 	@Test (expected = ArrayIndexOutOfBoundsException.class)
@@ -169,10 +162,18 @@ public class ShipsTest
 		 ships.isValid(testMap, 7,1);
 	}
 	
-	@Test
-	public void isValidTest() {
-		boolean result = ships.isValid(testMap, 1, 2);
+	@ParameterizedTest
+	@ValueSource(ints = {0,1,3,4})
+	public void isValidPassTest(int par) {
+		boolean result = ships.isValid(testMap, par, 2);
 		assertEquals(true, result);
+	}
+	
+	@ParameterizedTest
+	@ValueSource(ints = {5,6,7,9})
+	public void isValidFailTest(int par) {
+		boolean result = ships.isValid(testMap, par, 2);
+		assertThrows(ArrayIndexOutOfBoundsException.class, () -> ships.isValid(testMap, par, 2));
 	}
 	
 	@Test
@@ -207,9 +208,9 @@ public class ShipsTest
       		 assertArrayEquals(filledMap, insides);
     }
     
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void noWaterMapFillingTest() {
-    	int filledMap[][] = ships.FillMap(landOnly);
+    	assertThrows(IllegalArgumentException.class, () -> ships.FillMap(landOnly));
     }
   
     @Test

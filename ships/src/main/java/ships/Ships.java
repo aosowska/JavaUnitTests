@@ -1,7 +1,5 @@
 package ships;
 
-import java.security.InvalidParameterException;
-
 /**
  *1. Establish start point - direction and co-ordinates (x,y)
  *2. Movements - 'n'forward  and 'w' backward
@@ -43,7 +41,6 @@ public class Ships
 		Direction baseDirection = shipPosition.direction;
 		Direction whereToGo;
 		
-		//kierunek do ruchu wzgledny, ustalamy kierunek bezwgledny majac kierunek ustalenia statku
 		switch(baseDirection) {
 		case N:
 			whereToGo = SettingNorthMove(direction);
@@ -63,7 +60,7 @@ public class Ships
 		MoveByStep(whereToGo, shipPosition, map);
 	}
 	
-	//Kierunek rzeczywisty, po ustaleniu z kierunkiem poczatkowym 
+
 	public ShipPosition MoveByStep(Direction direction, ShipPosition shipPosition, int parMap[][]) {
 		int parX = shipPosition.x;
 		int parY = shipPosition.y;
