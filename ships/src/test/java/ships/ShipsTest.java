@@ -43,6 +43,76 @@ public class ShipsTest
      ships = new Ships();
 	}
 	
+	@Test 
+	public void SettingNorthMovesTest() {
+		Direction result;
+		result = ships.SettingNorthMove(Direction.W);
+		assertEquals(result, Direction.W);
+		
+		result = ships.SettingNorthMove(Direction.E);
+		assertEquals(result, Direction.E);
+		
+		result = ships.SettingNorthMove(Direction.N);
+		assertEquals(result, Direction.N);
+		
+		result = ships.SettingNorthMove(Direction.S);
+		assertEquals(result, Direction.S);
+	}
+	
+	@Test 
+	public void SettingSouthMovesTest() {
+		Direction result;
+
+		result = ships.SettingSouthMove(Direction.N);
+		assertEquals(result, Direction.S);
+
+		result = ships.SettingSouthMove(Direction.S);
+		assertEquals(result, Direction.N);
+
+		result = ships.SettingSouthMove(Direction.E);
+		assertEquals(result, Direction.W);
+
+		result = ships.SettingSouthMove(Direction.W);
+		assertEquals(result, Direction.E);
+	}
+	
+	@Test 
+	public void SettingWestMovesTest() {
+		Direction result;
+		
+		result = ships.SettingWestMove(Direction.N);
+		assertEquals(result, Direction.E);
+		
+		result = ships.SettingWestMove(Direction.S);
+		assertEquals(result, Direction.W);
+		
+		result = ships.SettingWestMove(Direction.E);
+		assertEquals(result, Direction.S);
+		
+		result = ships.SettingWestMove(Direction.W);
+		assertEquals(result, Direction.N);
+		
+	}
+	@Test 
+	public void SettingEastMovesTest() {
+		Direction result;
+		
+		result = ships.SettingEastMove(Direction.N);
+		assertEquals(result, Direction.W);
+		
+		result = ships.SettingEastMove(Direction.S);
+		assertEquals(result, Direction.E);
+		
+		result = ships.SettingEastMove(Direction.E);
+		assertEquals(result, Direction.N);
+		
+		result = ships.SettingEastMove(Direction.W);
+		assertEquals(result, Direction.S);
+	
+	}
+	
+	
+	
 	@Test (expected = IndexOutOfBoundsException.class)
 	public void isValidBiggerIndexTest() {
 		 ships.isValid(testMap, 7,1);
