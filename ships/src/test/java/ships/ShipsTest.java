@@ -87,7 +87,6 @@ public class ShipsTest
 	    assertEquals(2, result.x);
 	    assertEquals(1, result.y);
 	}
-
 	
 	@Test
 	public void MoveByStepBackwardTest() {
@@ -95,7 +94,6 @@ public class ShipsTest
 	    assertEquals(1, result.x);
 	    assertEquals(2, result.y);
 	}
-	
 	
 	@Test 
 	public void SettingNorthMovesTest() {
@@ -144,9 +142,9 @@ public class ShipsTest
 		assertEquals(Direction.S, result);
 		
 		result = ships.SettingWestMove(Direction.W);
-		assertEquals(Direction.N, result);
-		
+		assertEquals(Direction.N, result);		
 	}
+	
 	@Test 
 	public void SettingEastMovesTest() {
 		Direction result;
@@ -161,8 +159,7 @@ public class ShipsTest
 		assertEquals(Direction.N, result);
 		
 		result = ships.SettingEastMove(Direction.W);
-		assertEquals(Direction.S, result);
-	
+		assertEquals(Direction.S, result);	
 	}
 	
 	@Test (expected = ArrayIndexOutOfBoundsException.class)
@@ -216,7 +213,7 @@ public class ShipsTest
       		 assertArrayEquals(filledMap, insides);
     }
     
-    @Test// (expected = IllegalArgumentException.class)
+    @Test
     public void noWaterMapFillingTest() {
     	assertThrows(IllegalArgumentException.class, () -> ships.FillMap(landOnly));
     }
@@ -244,6 +241,5 @@ public class ShipsTest
     public void tearDown(){
        ships = null;
        shipPosition = null;
-}
-	
+	}
 }
