@@ -22,7 +22,7 @@ public class Ships
             {0,0,0,0,0},
             {0,0,0,0,0}
         };
-	
+//region Validation
 	public boolean isValid(int[][] map, int parX, int parY) {
 		if(parX < 5 && parY < 5) return true;
 	throw new IndexOutOfBoundsException("This coordinates are out of map");
@@ -37,15 +37,14 @@ public class Ships
 		shipPosition = new ShipPosition(x,y,direction);
 		return shipPosition;
 	}
+//endregion Validation
 	
 	public void Move(ShipPosition shipPosition, Direction direction, int[][] map) {
-		int x = shipPosition.x;
-		int y = shipPosition.x;
 		Direction baseDirection = shipPosition.direction;
-
 		Direction whereToGo;
+		
 		//kierunek do ruchu wzgledny, ustalamy kierunek bezwgledny majac kierunek ustalenia statku
-		switch(direction) {
+		switch(baseDirection) {
 		case N:
 			whereToGo = SettingNorthMove(direction);
 			break;
@@ -79,10 +78,12 @@ public class Ships
 		case W:
 			parX =+ 1;			
 		}
-		if(!isWater(map, parX, parY)) throw new IllegalArgumentException("You can only move by water!");
-		else {
+		if(isWater(map, parX, parY) && isValid(map, parX, parY)) {
 			shipPosition.x = parX;
 			shipPosition.y = parY;
+		}
+		else {
+			throw new IllegalArgumentException("You can only move by water!");
 		}
 		return shipPosition;
 	}

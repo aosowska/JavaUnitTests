@@ -9,6 +9,8 @@ import org.junit.Test;
 
 //import junit.framework.TestSuite;
 import ships.Ships;
+import ships.Direction;
+import ships.ShipPosition;
 
 /**
  * Testing "Ships" game
@@ -27,30 +29,41 @@ public class ShipsTest
             {0,0,0,0,0},
             {0,0,0,0,0}
         };
+    
+    private int testMap[][]= {
+            {1,0,0,0,0},
+            {0,0,0,0,0},
+            {0,0,1,0,0},
+            {0,0,0,0,0},
+            {1,0,0,0,0}
+        };
 
 	@Before
     public void setUp(){
      ships = new Ships();
 	}
 	
-	@Test
-	public void isValidBiggerArrayTest() {
-		
+	@Test (expected = IndexOutOfBoundsException.class)
+	public void isValidBiggerIndexTest() {
+		 ships.isValid(testMap, 7,1);
 	}
 	
 	@Test
 	public void isValidTest() {
-		
+		boolean result = ships.isValid(testMap, 1, 2);
+		assertEquals(result, true);
 	}
 	
 	@Test
-	public void isWaterTest() {
-		//cleanMap test
+	public void isWaterFalseTest() {
+		boolean result = ships.isWater(testMap, 0, 0);
+		assertEquals(result, false);
 	}
 	
 	@Test
-	public void isWaterFailTest() {
-		//Land test
+	public void isWaterTrueTest() {
+		boolean result = ships.isWater(testMap, 1, 0);
+		assertEquals(result, true);
 	}
 	
 	
