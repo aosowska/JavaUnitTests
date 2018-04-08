@@ -1,5 +1,7 @@
 package ships;
 
+import java.security.InvalidParameterException;
+
 /**
  *1. Establish start point - direction and co-ordinates (x,y)
  *2. Movements - 'n'forward  and 'w' backward
@@ -32,23 +34,53 @@ public class Ships
 		int y = shipPosition.x;
 		Direction baseDirection = shipPosition.direction;
 
+		Direction whereToGo;
+		//kierunek do ruchu wzgledny, ustalamy kierunek bezwgledny majac kierunek ustalenia statku
+		switch(direction) {
+		case N:
+			whereToGo = SettingNorthMove(direction);
+			break;
+		case S:
+			whereToGo = SettingSouthMove(direction);
+			break;
+		case E:
+			whereToGo = SettingEastMove(direction);
+			break;
+		case W:
+			whereToGo = SettingWestMove(direction);
+			break;
+			default:
+				throw new IllegalArgumentException();				
+		}
+		MoveByStep(whereToGo, shipPosition, map);
+	}
+	
+	//Kierunek rzeczywisty, po ustaleniu z kierunkiem poczatkowym 
+	public ShipPosition MoveByStep(Direction direction, ShipPosition shipPosition, int map[][]) {
+		int parX = shipPosition.x;
+		int parY = shipPosition.y;
 
 		switch(direction) {
 		case N:
-			break;
+			parY =+1;			
 		case S:
-			break;
+			parY =-1;
 		case E:
-			break;
+			parX=-1;
 		case W:
-			break;
-		default:
-			break;
-		}		
+			parX=+1;			
+		}
+		if(map[parX][parY] == 1) throw new IllegalArgumentException("You can only move by water!");
+		else {
+			shipPosition.x = parX;
+			shipPosition.y = parY;
+		}
+		return shipPosition;
 	}
 	 public Direction SettingSouthMove(Direction direction) {
 		 switch (direction) {
 			case N:
+				
 				return Direction.S;
 			case S:
 				return Direction.N;
@@ -57,12 +89,27 @@ public class Ships
 			case W:
 				return Direction.E;
 		 }
-		 return null;//exception added 
+		 throw new InvalidParameterException();
 	 }
 	 
 	 public Direction SettingEastMove(Direction direction) {
 		 switch (direction) {
 			case N:
+				return Direction.W;
+			case S:
+				return Direction.E;
+			case E:
+				return Direction.N;
+			case W:
+				return Direction.S;
+		 }
+		 throw new InvalidParameterException();
+	 }
+	 
+	 // Depends on ship first direction
+	 public Direction SettingWestMove(Direction direction) {
+		 switch (direction) {
+			case N:
 				return Direction.E;
 			case S:
 				return Direction.W;
@@ -71,35 +118,14 @@ public class Ships
 			case W:
 				return Direction.N;
 		 }
-		 return null;//exception added 
+		 throw new InvalidParameterException();
 	 }
 	
 	 public Direction SettingNorthMove(Direction direction) {
 		 return direction;
 	 }
 	
-	public void MoveLeft() {
-		
-	}
-	public void MoveRight() {
-		
-	}
-	public void MoveForward() {
-		
-	}
-	public void MoveBackward() {
-		
-	}
-	
-	public int CheckNextPosition(ShipPosition shipPosition, int[][] map, Direction direction) {
-		 int x = shipPosition.x;
-		 int y = shipPosition.y;
-		 map[x][y] = 0 
-		 
-		
-		return 0;
-	}
-	
+//Map methods region
     public int[][] CreateMap() {   	
     	return map;
     }
@@ -124,5 +150,5 @@ public class Ships
       		  if (mapForClearing[i][j] == 1) mapForClearing[i][j] = 0; 
     	return mapForClearing;
     }
-    
+ //End region
 }
