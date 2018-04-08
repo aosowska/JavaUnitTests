@@ -25,11 +25,11 @@ public class Ships
 //region Validation
 	public boolean isValid(int[][] map, int parX, int parY) {
 		if(parX < 5 && parY < 5) return true;
-	throw new IndexOutOfBoundsException("This coordinates are out of map");
+	throw new ArrayIndexOutOfBoundsException("This coordinates are out of map");
 	}
 	
-	public boolean isWater(int[][] map, int parX, int parY) {
-		if(map[parX][parY] == 0) return true;
+	public boolean isWater(int[][] parMap, int parX, int parY) {
+		if(parMap[parX][parY] == 0) return true;
 		else return false;
 	}
 	
@@ -64,26 +64,30 @@ public class Ships
 	}
 	
 	//Kierunek rzeczywisty, po ustaleniu z kierunkiem poczatkowym 
-	public ShipPosition MoveByStep(Direction direction, ShipPosition shipPosition, int map[][]) {
+	public ShipPosition MoveByStep(Direction direction, ShipPosition shipPosition, int parMap[][]) {
 		int parX = shipPosition.x;
 		int parY = shipPosition.y;
 
 		switch(direction) {
 		case N:
-			parY =+ 1;			
+			parY = parY - 1;	
+			break;
 		case S:
-			parY =- 1;
+			parY = parY + 1;
+			break;
 		case E:
-			parX =- 1;
+			parX = parX + 1;
+			break;
 		case W:
-			parX =+ 1;			
+			parX = parX - 1;	
+			break;
 		}
-		if(isWater(map, parX, parY) && isValid(map, parX, parY)) {
-			shipPosition.x = parX;
-			shipPosition.y = parY;
+		if(isWater(parMap, parX, parY) && isValid(parMap, parX, parY)) {
+     		shipPosition.setX(parX);
+			shipPosition.setY(parY);
 		}
 		else {
-			throw new IllegalArgumentException("You can only move by water!");
+			throw new ArrayIndexOutOfBoundsException("You can only move by water!");
 		}
 		return shipPosition;
 	}
@@ -92,8 +96,7 @@ public class Ships
 // Depends on ship base direction
 	 public Direction SettingSouthMove(Direction direction) {
 		 switch (direction) {
-			case N:
-				
+			case N:			
 				return Direction.S;
 			case S:
 				return Direction.N;
@@ -102,7 +105,7 @@ public class Ships
 			case W:
 				return Direction.E;
 		 }
-		 throw new InvalidParameterException("Out of range direction parameter.");
+		 throw new ArrayIndexOutOfBoundsException("Out of range direction parameter.");
 	 }
 	 
 	 public Direction SettingEastMove(Direction direction) {
@@ -116,7 +119,7 @@ public class Ships
 			case W:
 				return Direction.S;
 		 }
-		 throw new InvalidParameterException("Out of range direction parameter.");
+		 throw new ArrayIndexOutOfBoundsException("Out of range direction parameter.");
 	 }
 	 
 	 public Direction SettingWestMove(Direction direction) {
@@ -130,7 +133,7 @@ public class Ships
 			case W:
 				return Direction.N;
 		 }
-		 throw new InvalidParameterException("Out of range direction parameter.");
+		 throw new ArrayIndexOutOfBoundsException("Out of range direction parameter.");
 	 }
 	
 	 public Direction SettingNorthMove(Direction direction) {
