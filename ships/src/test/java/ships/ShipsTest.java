@@ -47,10 +47,18 @@ public class ShipsTest
             {1,1,1,1,1},
             {1,1,1,1,1}
         };
+    
+    
 	@Before
     public void setUp(){
      ships = new Ships();
      shipPosition =  new ShipPosition(1,1,Direction.N); 
+	}
+	
+	
+	@Test
+	public void MoveTest() {
+		
 	}
 	
 	@Test (expected = ArrayIndexOutOfBoundsException.class)
@@ -64,8 +72,6 @@ public class ShipsTest
 	    assertEquals(1, result.getX());
 	    assertEquals(0, result.getY());
 	}
-	
-	
 	
 	@Test
 	public void MoveByStepLeftTest() {
@@ -184,12 +190,9 @@ public class ShipsTest
     @Test
     public void createMapTest() {
        int map[][] = ships.CreateMap();  
-      assertEquals(map.length, mapLength);
-      for(int i = 0; i < mapLength; i ++ ) {
-    	  for(int j = 0; j < mapLength; j ++ ) {
-    		 assertThat(map[i][j], is(not(nullValue())));
-    	  }
-      }
+     	assertEquals(map.length, mapLength);
+       	assertNotNull(map);
+
     }
 	  
     @Test
@@ -202,18 +205,14 @@ public class ShipsTest
                 {0,0,0,0,1}
             };
     	int filledMap[][] = ships.FillMap(insides);
-        for(int i = 0; i < mapLength; i ++ ) {
-      	  for(int j = 0; j < mapLength; j ++ ) {
-      		 assertThat(filledMap[i][j], is(insides[i][j]));
-      	  }
-        }
+      		 assertArrayEquals(filledMap, insides);
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void noWaterMapFillingTest() {
     	int filledMap[][] = ships.FillMap(landOnly);
     }
-    
+ /*   
     @Test
     public void waterMapFillingTest() {
     	int insides[][]= {
@@ -231,18 +230,13 @@ public class ShipsTest
         //to refactor, isWater insides versus filledMap
        // assertEquals(counter, is(not(mapLength*mapLength)));
     }
-    
+    */
     @Test
     public void clearMapTest() {
     	int cleanedMap[][] = ships.ClearMap(testMap);
-    	int counter = 0;
-        for(int i = 0; i < mapLength; i ++ ) 
-        	  for(int j = 0; j < mapLength; j ++ ) 
-        		if(cleanedMap[i][j] == 0) counter++;
-        assertThat(counter, is(mapLength*mapLength));
+    	assertArrayEquals(cleanedMap, cleanMap);
     }
     
-   
 	@After
     public void tearDown(){
        ships = null;

@@ -18,5 +18,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="C:/Users/Aleksandra/Downloads/junit-jupiter-engine-5.0.0-M4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
