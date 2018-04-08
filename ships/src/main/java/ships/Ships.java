@@ -14,7 +14,6 @@ import java.security.InvalidParameterException;
 public class Ships 
 {    
 	private int mapLength = 5;
-//	private int[][] presentPosition;
 	private ShipPosition shipPosition;
 	private  int map[][]= {
             {0,0,0,0,0},
@@ -23,6 +22,11 @@ public class Ships
             {0,0,0,0,0},
             {0,0,0,0,0}
         };
+	
+	public boolean isValid(int[][] map, int parX, int parY) {
+		if(parX < 5 && parY < 5) return true;
+	throw new IndexOutOfBoundsException("This coordinates are out of map");
+	}
 	
 	public ShipPosition EstablishStartPoint(int x, int y, Direction direction) {
 		shipPosition = new ShipPosition(x,y,direction);
