@@ -33,6 +33,28 @@ public class ShipsTest
      ships = new Ships();
 	}
 	
+	@Test
+	public void isValidBiggerArrayTest() {
+		
+	}
+	
+	@Test
+	public void isValidTest() {
+		
+	}
+	
+	@Test
+	public void isWaterTest() {
+		//cleanMap test
+	}
+	
+	@Test
+	public void isWaterFailTest() {
+		//Land test
+	}
+	
+	
+	
     @Test
     public void createMapTest() {
        int map[][] = ships.CreateMap();  

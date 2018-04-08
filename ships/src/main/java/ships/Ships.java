@@ -28,6 +28,11 @@ public class Ships
 	throw new IndexOutOfBoundsException("This coordinates are out of map");
 	}
 	
+	public boolean isWater(int[][] map, int parX, int parY) {
+		if(map[parX][parY] == 0) return true;
+		else return false;
+	}
+	
 	public ShipPosition EstablishStartPoint(int x, int y, Direction direction) {
 		shipPosition = new ShipPosition(x,y,direction);
 		return shipPosition;
@@ -66,21 +71,24 @@ public class Ships
 
 		switch(direction) {
 		case N:
-			parY =+1;			
+			parY =+ 1;			
 		case S:
-			parY =-1;
+			parY =- 1;
 		case E:
-			parX=-1;
+			parX =- 1;
 		case W:
-			parX=+1;			
+			parX =+ 1;			
 		}
-		if(map[parX][parY] == 1) throw new IllegalArgumentException("You can only move by water!");
+		if(!isWater(map, parX, parY)) throw new IllegalArgumentException("You can only move by water!");
 		else {
 			shipPosition.x = parX;
 			shipPosition.y = parY;
 		}
 		return shipPosition;
 	}
+	
+//region Settings moves direction
+// Depends on ship base direction
 	 public Direction SettingSouthMove(Direction direction) {
 		 switch (direction) {
 			case N:
@@ -93,7 +101,7 @@ public class Ships
 			case W:
 				return Direction.E;
 		 }
-		 throw new InvalidParameterException();
+		 throw new InvalidParameterException("Out of range direction parameter.");
 	 }
 	 
 	 public Direction SettingEastMove(Direction direction) {
@@ -107,10 +115,9 @@ public class Ships
 			case W:
 				return Direction.S;
 		 }
-		 throw new InvalidParameterException();
+		 throw new InvalidParameterException("Out of range direction parameter.");
 	 }
 	 
-	 // Depends on ship first direction
 	 public Direction SettingWestMove(Direction direction) {
 		 switch (direction) {
 			case N:
@@ -122,13 +129,14 @@ public class Ships
 			case W:
 				return Direction.N;
 		 }
-		 throw new InvalidParameterException();
+		 throw new InvalidParameterException("Out of range direction parameter.");
 	 }
 	
 	 public Direction SettingNorthMove(Direction direction) {
 		 return direction;
 	 }
-	
+//end region
+	 
 //Map methods region
     public int[][] CreateMap() {   	
     	return map;
