@@ -192,7 +192,6 @@ public class ShipsTest
        int map[][] = ships.CreateMap();  
      	assertEquals(map.length, mapLength);
        	assertNotNull(map);
-
     }
 	  
     @Test
@@ -212,7 +211,7 @@ public class ShipsTest
     public void noWaterMapFillingTest() {
     	int filledMap[][] = ships.FillMap(landOnly);
     }
- /*   
+  
     @Test
     public void waterMapFillingTest() {
     	int insides[][]= {
@@ -223,14 +222,9 @@ public class ShipsTest
                 {1,1,0,1,1}
             };
     	int filledMap[][] = ships.FillMap(insides);
-    //	int counter = 0;
-        for(int i = 0; i < mapLength; i ++ ) 
-      	  for(int j = 0; j < mapLength; j ++ ) ;
-      		//if(filledMap[i][j] == 1) counter++;
-        //to refactor, isWater insides versus filledMap
-       // assertEquals(counter, is(not(mapLength*mapLength)));
+        assertArrayEquals(filledMap, insides);
     }
-    */
+    
     @Test
     public void clearMapTest() {
     	int cleanedMap[][] = ships.ClearMap(testMap);
