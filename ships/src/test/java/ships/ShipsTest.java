@@ -54,6 +54,14 @@ public class ShipsTest
      shipPosition =  new ShipPosition(1,1,Direction.N); 
 	}
 	
+	@Test
+	public void EstablishStartPoint() {
+		ShipPosition result = ships.EstablishStartPoint(2, 3, Direction.S);
+		assertEquals(2,result.x);
+		assertEquals(3,result.y);
+		assertEquals(Direction.S,result.direction);
+	}
+	
 	@Test (expected = ArrayIndexOutOfBoundsException.class)
 	public void MoveByStepExceptionTest() {
 		ships.MoveByStep(Direction.N, shipPosition, landOnly);
@@ -208,7 +216,7 @@ public class ShipsTest
       		 assertArrayEquals(filledMap, insides);
     }
     
-    @Test
+    @Test// (expected = IllegalArgumentException.class)
     public void noWaterMapFillingTest() {
     	assertThrows(IllegalArgumentException.class, () -> ships.FillMap(landOnly));
     }
