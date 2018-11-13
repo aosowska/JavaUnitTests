@@ -11,13 +11,8 @@ import ships.Ships;
 import ships.Direction;
 import ships.ShipPosition;
 
-/**
- * Testing "Ships" game
- * *6. Map configuration -> input map 
- * 
- */
-public class ShipsTest 
 
+public class ShipsTest 
 {
     private Ships ships;
     private int mapLength = 5; 
