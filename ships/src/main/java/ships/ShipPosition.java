@@ -21,7 +21,7 @@ public class ShipPosition {
 			this.y = y;
 		}
 		
-	    public Direction getDirection() {
+	   	 public Direction getDirection() {
 			return direction;
 		}
 
@@ -30,8 +30,8 @@ public class ShipPosition {
 		}
 
 		ShipPosition(int parX, int parY, Direction parDirection){
-		x = parX;
-		y = parY;
-		direction = parDirection;		
-	}
+			x = parX;
+			y = parY;
+			direction = parDirection;		
+		}
 }
